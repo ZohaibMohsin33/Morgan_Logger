@@ -1,0 +1,56 @@
+Project 3 :
+Morgan App
+
+npm i -y // to initialize this as npm pakage 
+npm i express nodemon morgan uuid
+
+npm.morgan // Open this website on google and get information related to it  
+
+Create a file named as server.js 
+
+const express = require('express')
+const morgan  = require('morgan')
+
+const app     = express();
+const PORT    = 3000;
+
+app.use(morgan('combined')) or app.use(morgan(':method :status :url "HTTP/:http-version"'));
+
+app.get('/',(req,res)=>{
+  res.end('Morgan Logger App');
+})
+app.listen(PORT,()=>{console.log('The app is running on the port 3000')})
+
+For the sake of unique id : 
+
+const {v4 : uuidv4} = require('uuid');
+
+          name of token              
+       it can be anything
+morgan.token('param',function(req,res,param){
+
+return "User Token"
+})
+
+morgan.token('id': function getid(req){
+
+   return req.id ; 
+})
+app.use(assignid)
+
+app.use(morgan('combined')) or app.use(morgan(':param :id :method :status :url "HTTP/:http-version"'));
+
+function assignid(req,res,next){
+     req.id = uuid4();
+     next();
+}
+
+To handle user request in a gentle manner 
+
+const fs = require('fs');
+const path = require('path');
+
+                                           To create file                     To Append
+let accessLogStream = fs.createWriteStream(path.join(__dirname,"access.log"), {flags:'a'})
+
+app.use(morgan(':param :id :method :status :url "HTTP/:http-version"', {stream : accessLogStream}));
